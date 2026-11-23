@@ -8,6 +8,7 @@ import * as P from './math/poly.ts'
 import { useLines, useMesh } from './useCompute.ts'
 import { LatexText } from './components/LatexText.tsx'
 import { SurfaceViewer } from './components/SurfaceViewer.tsx'
+import { References } from './components/References.tsx'
 import type { Segment } from './components/SurfaceViewer.tsx'
 import './App.css'
 
@@ -127,13 +128,13 @@ function App() {
         <section className="intro">
           <h1>The 27 lines</h1>
           <p>
-            <LatexText source="A cubic surface is the zero set $S = V(F) \subset \mathbb{P}^3$ of a homogeneous polynomial $F(x, y, z, w)$ of degree $3$. In 1849 Cayley and Salmon proved that every smooth cubic surface over $\mathbb{C}$ contains exactly $27$ straight lines, no matter which smooth cubic you pick. Singular cubics have fewer: Cayley's nodal cubic below has only $9$." />
+            <LatexText source="A cubic surface is the zero set $S = V(F) \subset \mathbb{P}^3$ of a homogeneous polynomial $F(x, y, z, w)$ of degree $3$. In 1849 Cayley and Salmon proved that every smooth cubic surface over $\mathbb{C}$ contains exactly $27$ straight lines, no matter which smooth cubic you pick [@cayley1849; @salmon1849]. Singular cubics have fewer: Cayley's nodal cubic below has only $9$ [@cayley1869]." />
           </p>
           <p>
-            <LatexText source="The lines have a rigid configuration. Each line meets exactly $10$ of the others, and $S$ is the blow-up of $\mathbb{P}^2$ in six points in general position: the $27$ lines are the $6$ exceptional curves, the $15$ lines through two of the points, and the $6$ conics through five of them." />
+            <LatexText source="The lines have a rigid configuration. Each line meets exactly $10$ of the others, and $S$ is the blow-up of $\mathbb{P}^2$ in six points in general position: the $27$ lines are the $6$ exceptional curves, the $15$ lines through two of the points, and the $6$ conics through five of them [@hartshorne, Ch. V, §4]. See also [@reid] for an elementary account and [@dolgachev, Ch. 9] for much more." />
           </p>
           <p>
-            <LatexText source="Over $\mathbb{R}$ the picture is less uniform. Schläfli showed that a smooth real cubic surface contains exactly $27$, $15$, $7$ or $3$ real lines; the others come in complex-conjugate pairs. On the Clebsch diagonal surface all $27$ are real." />
+            <LatexText source="Over $\mathbb{R}$ the picture is less uniform. Schläfli showed that a smooth real cubic surface contains exactly $27$, $15$, $7$ or $3$ real lines; the others come in complex-conjugate pairs [@schlafli1858; @segre]. On the Clebsch diagonal surface all $27$ are real [@clebsch1871]." />
           </p>
         </section>
 
@@ -336,13 +337,22 @@ function App() {
               <LatexText source="Input without $w$ is an affine cubic $f(x, y, z)$ and is homogenised to $F = w^3 f(x/w, y/w, z/w)$. The picture shows the real points of the affine chart $w = 1$ near the origin." />
             </li>
             <li>
-              <LatexText source="Smoothness is checked exactly over $\mathbb{C}$, including points at infinity. $S$ is singular iff $F_x, F_y, F_z, F_w$ have a common zero in $\mathbb{P}^3$. Four quadrics have no common zero iff they form a regular sequence, iff their ideal contains every monomial of degree $5$. So the page checks that the $80 \times 56$ matrix of products $m \cdot F_i$ (with $\deg m = 3$) has rank $56$, computing modulo large random primes." />
+              <LatexText source="Smoothness is checked exactly over $\mathbb{C}$, including points at infinity. $S$ is singular iff $F_x, F_y, F_z, F_w$ have a common zero in $\mathbb{P}^3$. Four quadrics have no common zero iff they form a regular sequence, iff their ideal contains every monomial of degree $5$. So the page checks that the $80 \times 56$ matrix of products $m \cdot F_i$ (with $\deg m = 3$) has rank $56$, computing modulo large random primes. For regular sequences, Hilbert series and Macaulay matrices, see [@clo]." />
             </li>
             <li>
-              <LatexText source="Lines: after a random orthogonal change of coordinates, almost every line is spanned by $(1, 0, a, b)$ and $(0, 1, c, d)$. The line lies on $S$ iff the four coefficients of $F(s\,u + t\,v)$ vanish: four cubic equations in $a, b, c, d$. These are solved by homotopy continuation, tracking $81$ paths from $a^3 = b^3 = c^3 = d^3 = 1$. Exactly $27$ paths converge to finite solutions; solutions with zero imaginary part are the real lines." />
+              <LatexText source="Lines: after a random orthogonal change of coordinates, almost every line is spanned by $(1, 0, a, b)$ and $(0, 1, c, d)$. The line lies on $S$ iff the four coefficients of $F(s\,u + t\,v)$ vanish: four cubic equations in $a, b, c, d$. These are solved by homotopy continuation, tracking $81$ paths from $a^3 = b^3 = c^3 = d^3 = 1$. Exactly $27$ paths converge to finite solutions; solutions with zero imaginary part are the real lines. The method (including the random complex constant that keeps paths apart) is described in [@sommese-wampler]." />
             </li>
-            <li>The surface is triangulated with marching tetrahedra on a grid over the box. Everything runs in your browser.</li>
+            <li>
+              <LatexText source="The surface is triangulated with marching tetrahedra [@doi-koide] on a grid over the box. Everything runs in your browser." />
+            </li>
           </ol>
+        </section>
+
+        <hr />
+
+        <section>
+          <h2>References</h2>
+          <References />
         </section>
       </main>
 

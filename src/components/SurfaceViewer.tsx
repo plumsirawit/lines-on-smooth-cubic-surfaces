@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Engine } from '@babylonjs/core/Engines/engine'
 import { Scene } from '@babylonjs/core/scene'
 import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera'
@@ -67,6 +67,10 @@ export function SurfaceViewer({ mesh, segments, halfSize, showSurface, transluce
   const sceneRef = useRef<Scene | null>(null)
   const cameraRef = useRef<ArcRotateCamera | null>(null)
   const surfaceRef = useRef<Mesh | null>(null)
+  // On touch screens the canvas would otherwise swallow page scrolling, so the camera only
+  // takes touch input after the user taps "rotate and zoom"; mouse users get it immediately.
+  const [touchDevice] = useState(() => window.matchMedia('(pointer: coarse)').matches)
+  const [interactive, setInteractive] = useState(!touchDevice)
 
   // Engine, scene, camera and lights: created once.
   useEffect(() => {
@@ -75,7 +79,6 @@ export function SurfaceViewer({ mesh, segments, halfSize, showSurface, transluce
     const scene = new Scene(engine)
     scene.clearColor = new Color4(0.97, 0.97, 0.97, 1)
     const camera = new ArcRotateCamera('camera', -Math.PI / 3, Math.PI / 2.8, 10, Vector3.Zero(), scene)
-    camera.attachControl(canvas, true)
     camera.minZ = 0.01
     const hemi = new HemisphericLight('hemi', new Vector3(0, 1, 0), scene)
     hemi.intensity = 0.55
@@ -99,6 +102,14 @@ export function SurfaceViewer({ mesh, segments, halfSize, showSurface, transluce
       cameraRef.current = null
     }
   }, [])
+
+  // Attach or release camera controls.
+  useEffect(() => {
+    const camera = cameraRef.current
+    if (!camera || !interactive) return
+    camera.attachControl(canvasRef.current, true)
+    return () => camera.detachControl()
+  }, [interactive])
 
   // Camera distance and bounding box follow the view size.
   useEffect(() => {
@@ -189,5 +200,23 @@ export function SurfaceViewer({ mesh, segments, halfSize, showSurface, transluce
     return () => tubes.forEach((t) => t.dispose(false, true))
   }, [segments, halfSize])
 
-  return <canvas ref={canvasRef} className="viewer-canvas" aria-label="3D view of the cubic surface and its real lines" />
+  return (
+    <>
+      <canvas
+        ref={canvasRef}
+        className={interactive ? 'viewer-canvas interactive' : 'viewer-canvas'}
+        aria-label="3D view of the cubic surface and its real lines"
+      />
+      {touchDevice &&
+        (interactive ? (
+          <button type="button" className="viewer-toggle done" onClick={() => setInteractive(false)}>
+            Done
+          </button>
+        ) : (
+          <button type="button" className="viewer-toggle" onClick={() => setInteractive(true)}>
+            Tap to rotate and zoom
+          </button>
+        ))}
+    </>
+  )
 }

@@ -9,6 +9,7 @@ import { useLines, useMesh } from './useCompute.ts'
 import { LatexText } from './components/LatexText.tsx'
 import { SurfaceViewer } from './components/SurfaceViewer.tsx'
 import { References } from './components/References.tsx'
+import { ViewerErrorBoundary } from './components/ViewerErrorBoundary.tsx'
 import type { Segment } from './components/SurfaceViewer.tsx'
 import './App.css'
 
@@ -202,16 +203,18 @@ function App() {
                 <span>
                   <LatexText source={`Real points with $w = 1$ in $[-${halfSize}, ${halfSize}]^3$`} />
                 </span>
-                <span>{meshJob.status === 'running' ? 'Meshing…' : 'Drag to rotate · scroll to zoom'}</span>
+                <span>{meshJob.status === 'running' ? 'Meshing…' : 'Drag to rotate · scroll or pinch to zoom'}</span>
               </div>
               <div className="viewer">
-                <SurfaceViewer
-                  mesh={result.ok && meshJob.status === 'done' ? meshJob.value : null}
-                  segments={result.ok ? segments : []}
-                  halfSize={halfSize}
-                  showSurface={showSurface}
-                  translucent={translucent}
-                />
+                <ViewerErrorBoundary>
+                  <SurfaceViewer
+                    mesh={result.ok && meshJob.status === 'done' ? meshJob.value : null}
+                    segments={result.ok ? segments : []}
+                    halfSize={halfSize}
+                    showSurface={showSurface}
+                    translucent={translucent}
+                  />
+                </ViewerErrorBoundary>
               </div>
               <div className="viewer-controls">
                 <label className="range-control">

@@ -1,5 +1,7 @@
 # lines-on-smooth-cublic-surfaces
 
+![](https://github.com/plumsirawit/lines-on-smooth-cublic-surfaces/blob/fa011de0e36ebbc340092d72771c997bc2005ee9/public/og-image.png)
+
 An attempt of a visualization of straight lines on smooth cubic surfaces.
 
 Enter a cubic polynomial; the page checks that it defines a smooth cubic surface, draws its real

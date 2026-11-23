@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test tests/"
   },
   "dependencies": {
     "@babylonjs/core": "^9.37.2",
+    "katex": "^0.19.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

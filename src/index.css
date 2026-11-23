@@ -1,9 +1,72 @@
-html,
-body,
-#root {
+/* Base theme shared with alg-geo-grinder. */
+:root {
+  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #eee;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+  line-height: 1.55;
+
+  --page-background: #eee;
+  --ink: #111;
+  --muted: #444;
+  --link: #00e;
+  --rule: #aaa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
   margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #111;
+  background: var(--page-background);
+}
+
+body,
+button,
+input,
+select {
+  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--link);
+}
+
+::selection {
+  color: var(--ink);
+  background: #cdd8ff;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+code,
+pre {
+  font-family: 'Fira Code', Consolas, monospace;
 }

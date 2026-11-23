@@ -30,10 +30,6 @@
   padding-top: 21px;
 }
 
-.intro {
-  max-width: 860px;
-}
-
 h1 {
   margin: 0 0 14px;
   font-size: 32px;
@@ -340,7 +336,6 @@ hr {
 }
 
 .how-list {
-  max-width: 860px;
   padding-left: 30px;
 }
 

@@ -119,7 +119,7 @@ function App() {
           Lines on Smooth Cubic Surfaces
         </a>
         <a className="header-link" href="https://github.com/plumsirawit/lines-on-smooth-cublic-surfaces">
-          Source
+          Source on GitHub
         </a>
       </header>
 
@@ -347,8 +347,7 @@ function App() {
       </main>
 
       <footer className="page-footer">
-        Built with React, Vite and Babylon.js. Theme from{' '}
-        <a href="https://github.com/plumsirawit/alg-geo-grinder">alg-geo-grinder</a>.
+        Built with React, Vite, KaTeX, and Babylon.js. Vibe-coded with GitHub Copilot and Claude Code.
       </footer>
     </div>
   )

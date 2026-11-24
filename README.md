@@ -1,4 +1,4 @@
-# lines-on-smooth-cublic-surfaces
+# lines-on-smooth-cubic-surfaces
 
 ![](https://github.com/plumsirawit/lines-on-smooth-cublic-surfaces/blob/fa011de0e36ebbc340092d72771c997bc2005ee9/public/og-image.png)
 
